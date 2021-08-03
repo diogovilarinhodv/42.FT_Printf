@@ -2,7 +2,7 @@
 
 static void	width_sup(int str_len, t_flag_count fc, char *str, int *inc)
 {
-	if (fc.width > 0 && fc.zero > 0)
+	if (fc.width > 0 && fc.zero > 0 && !(fc.less > 0))
 	{
 		while (fc.width - str_len)
 		{
@@ -20,7 +20,7 @@ static void	width_sup(int str_len, t_flag_count fc, char *str, int *inc)
 			(*inc)++;
 		}
 	}
-	else if (fc.zero > 0)
+	else if (fc.zero > 0 || fc.less > 0)
 	{
 		*(str + *inc) = ' ';
 		(*inc)++;
@@ -49,12 +49,22 @@ static void	flags_calcs(t_flag_count fc, int str_len, char **r)
 	if (fc.width > str_len && fc.width > 0)
 	{
 		str_helper = width_calcs(str_len, fc);
-		if (**r == '-')
+		if (**r == '-' && !(fc.less > 0))
 		{
 			**r = *str_helper;
 			*str_helper = '-';
 		}
-		tmp = ft_strjoin(str_helper, *r);
+		if (fc.less > 0)
+		{
+			*((*r) + ft_strlen(*r) - 1) = '\0';
+			tmp = ft_strjoin(*r, str_helper);
+			free(*r);
+			*r = ft_strjoin(tmp, "\n\0");
+			free(tmp);
+			tmp = ft_strdup(*r);
+		}
+		else
+			tmp = ft_strjoin(str_helper, *r);
 		free(str_helper);
 		free(*r);
 		*r = ft_strdup(tmp);
