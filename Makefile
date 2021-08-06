@@ -19,7 +19,8 @@ FORMATS	= formats/c_format.c formats/d_format.c formats/p_format.c formats/s_for
 
 CONVERTS= converts/p_dec_to_hexa.c converts/x_dec_to_hexa.c converts/xbig_dec_to_hexa.c
 
-UTILS= utils/check_format.c utils/count_flag.c utils/reset_count_flag.c utils/format_finder.c
+UTILS= utils/check_format.c utils/count_flag.c utils/reset_count_flag.c utils/format_finder.c utils/calc_width.c \
+		utils/ff_writer.c utils/str_padding.c
 
 BONUS= utils/check_format.c utils/count_flag.c utils/reset_count_flag.c
 

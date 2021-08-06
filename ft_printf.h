@@ -35,19 +35,22 @@ char	*dec_to_hexa_x(unsigned long num);
 char	*dec_to_hexa_X(unsigned long num);
 
 // FORMATS
-char	*format_c(int chr);
+char	*format_c(int chr, t_flag_count fc);
 char	*format_d(int num, t_flag_count s_fc);
-char	*format_p(unsigned long num);
+char	*format_p(unsigned long num, t_flag_count fc);
 char	*format_percent(void);
-char	*format_s(char *s);
+char	*format_s(char *s, t_flag_count fc);
 char	*format_u(unsigned int num, t_flag_count fc);
 char	*format_x(unsigned long num, t_flag_count s_fc);
 char	*format_X(unsigned long num, t_flag_count s_fc);
 
 // UTILS
 int		check_format(char c);
-void	count_flag(const char *str, int *inc, t_flag_count *fc);
+int		ff_writer(char *result);
 int		reset_count_flag(t_flag_count *s_fc);
+int		calc_width(const char *str, int *inc);
+char	*str_padding(int str_len, t_flag_count fc);
 char	*format_finder(char c, va_list ap, t_flag_count s_fc);
+void	count_flag(const char *str, int *inc, t_flag_count *fc);
 
 #endif
