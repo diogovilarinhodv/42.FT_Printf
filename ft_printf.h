@@ -17,6 +17,7 @@ typedef struct s_flag_count
 	int	dot;
 	int	width;
 	int	percent_finded;
+	int	precision;
 }	t_flag_count;
 
 int		ft_printf(const char *str, ...);
@@ -52,5 +53,6 @@ int		calc_width(const char *str, int *inc);
 char	*str_padding(int str_len, t_flag_count fc);
 char	*format_finder(char c, va_list ap, t_flag_count s_fc);
 void	count_flag(const char *str, int *inc, t_flag_count *fc);
+char	*precision_padding(int str_len, t_flag_count fc);
 
 #endif
