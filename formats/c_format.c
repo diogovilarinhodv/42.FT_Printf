@@ -1,6 +1,6 @@
 #include "../ft_printf.h"
 
-static void less_with_width_pad(t_flag_count fc, char **r, char *str_pad)
+static void	less_with_width_pad(t_flag_count fc, char **r, char *str_pad)
 {
 	char	*tmp;
 
@@ -32,6 +32,17 @@ static void	width_padding(t_flag_count fc, int str_len, char **r)
 	}
 }
 
+static void	zero_case(int *zero_finder, char **tmp)
+{
+	if (*zero_finder)
+	{
+		*zero_finder = 0;
+		while (*((*tmp) + *zero_finder) == 'a')
+			(*zero_finder)++;
+		*((*tmp) + *zero_finder - 1) = '\0';
+	}
+}
+
 char	*format_c(int chr, t_flag_count fc)
 {
 	char	*c;
@@ -50,15 +61,9 @@ char	*format_c(int chr, t_flag_count fc)
 	}
 	str_len = 1;
 	width_padding(fc, str_len, &c);
-	tmp = ft_strjoin(c ,"\n\0");
+	tmp = ft_strjoin(c, "\n\0");
 	free(c);
-	if (zero_finder)
-	{
-		zero_finder = 0;
-		while (*(tmp + zero_finder) == 'a')
-			zero_finder++;
-		*(tmp + zero_finder - 1) = '\0';
-	}
+	zero_case(&zero_finder, &tmp);
 	c = tmp;
 	return (c);
 }

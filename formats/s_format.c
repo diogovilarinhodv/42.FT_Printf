@@ -1,6 +1,6 @@
 #include "../ft_printf.h"
 
-static void less_with_width_pad(t_flag_count fc, char **r, char *str_pad)
+static void	less_with_width_pad(t_flag_count fc, char **r, char *str_pad)
 {
 	char	*tmp;
 
@@ -23,6 +23,7 @@ static void	width_padding(t_flag_count fc, int str_len, char **r)
 {
 	char	*str_pad;
 
+	str_len = ft_strlen(*r);
 	if ((fc.plus || fc.space) && **r != '-')
 		fc.width--;
 	if (fc.width > str_len && fc.width > 0)
@@ -49,15 +50,34 @@ static void	space_or_plus_padding(t_flag_count fc, char **r)
 	}
 }
 
+static void	precision_s(t_flag_count fc, int str_len, char *str)
+{
+	str_len = ft_strlen(str);
+	if (fc.dot > 0)
+	{
+		if ((str_len - 1) < fc.precision)
+		{
+			*(str + (str_len - 1)) = '\n';
+			*(str + (str_len - 1) + 1) = '\0';
+		}
+		else if (str_len)
+		{
+			*(str + fc.precision) = '\n';
+			*(str + fc.precision + 1) = '\0';
+		}
+	}
+}
+
 char	*format_s(char *s, t_flag_count fc)
 {
 	char	*str;
 	char	*tmp;
 	int		str_len;
 
+	str_len = ft_strlen(s);
 	if (s == NULL)
 		str = ft_strjoin("(null)", "\n\0");
-	else if (ft_strlen(s) == 0 && fc.less == 0 && fc.width == 0)
+	else if (str_len == 0 && fc.less == 0 && fc.width == 0)
 	{
 		str = ft_strdup(s);
 		tmp = str;
@@ -67,12 +87,12 @@ char	*format_s(char *s, t_flag_count fc)
 	else
 	{
 		str = ft_strdup(s);
-		str_len = ft_strlen(str);
 		width_padding(fc, str_len, &str);
 		space_or_plus_padding(fc, &str);
 		tmp = str;
 		str = ft_strjoin(tmp, "\n\0");
 		free(tmp);
 	}
+	precision_s(fc, str_len, str);
 	return (str);
 }

@@ -1,6 +1,6 @@
 #include "../ft_printf.h"
 
-static void less_with_width_pad(t_flag_count fc, char **r, char *str_pad)
+static void	less_with_width_pad(t_flag_count fc, char **r, char *str_pad)
 {
 	char	*tmp;
 
@@ -46,6 +46,30 @@ static void	space_or_plus_padding(t_flag_count fc, char **r)
 	free(tmp);
 }
 
+static void	precision_pad(t_flag_count fc, int str_len, char **r)
+{
+	char	*str_pad;
+	char	*tmp;
+
+	str_pad = NULL;
+	tmp = NULL;
+	if (**r == '-')
+		fc.precision++;
+	if (fc.precision > str_len && fc.precision > 0)
+	{
+		str_pad = precision_padding(str_len, fc);
+		if (**r == '-')
+		{
+			**r = *str_pad;
+			*str_pad = '-';
+		}
+		tmp = *r;
+		*r = ft_strjoin(str_pad, tmp);
+		free(tmp);
+		free(str_pad);
+	}
+}
+
 char	*format_u(unsigned int num, t_flag_count fc)
 {
 	char	*r;
@@ -53,6 +77,8 @@ char	*format_u(unsigned int num, t_flag_count fc)
 	int		str_len;
 
 	r = ft_unsigned_itoa(num);
+	str_len = ft_strlen(r);
+	precision_pad(fc, str_len, &r);
 	str_len = ft_strlen(r);
 	width_padding(fc, str_len, &r);
 	space_or_plus_padding(fc, &r);

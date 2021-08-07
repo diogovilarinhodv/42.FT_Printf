@@ -1,6 +1,6 @@
 #include "../ft_printf.h"
 
-static void less_with_width_pad(t_flag_count fc, char **r, char *str_pad)
+static void	less_with_width_pad(t_flag_count fc, char **r, char *str_pad)
 {
 	char	*tmp;
 
