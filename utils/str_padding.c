@@ -22,7 +22,7 @@ static void	padding_spaces(t_flag_count fc, int str_len, char *str, int *inc)
 
 char	*str_padding(int str_len, t_flag_count fc)
 {
-    char	*str;
+	char	*str;
 	int		inc;
 
 	inc = 0;

@@ -10,5 +10,6 @@ int	reset_count_flag(t_flag_count *fc)
 	fc->zero = 0;
 	fc->width = 0;
 	fc->percent_finded = 0;
+	fc->precision = 0;
 	return (1);
 }

@@ -2,19 +2,24 @@
 
 void	count_flag(const char *str, int *inc, t_flag_count *fc)
 {
-	if (*(str + (*inc)) == '#')
+	char	ch;
+
+	ch = *(str + (*inc));
+	if (ch == '#')
 		fc->cardinal++;
-	if (*(str + (*inc)) == ' ')
+	else if (ch == ' ')
 		fc->space++;
-	if (*(str + (*inc)) == '+')
+	else if (ch == '+')
 		fc->plus++;
-	if (*(str + (*inc)) == '0')
+	else if (ch == '0')
 		fc->zero++;
-	if (*(str + (*inc)) == '-')
+	else if (ch == '-')
 		fc->less++;
-	if (*(str + (*inc)) == '.')
+	else if (ch == '.')
 		fc->dot++;
-	if ('1' <= *(str + (*inc)) && *(str + (*inc)) <= '9')
+	else if ('1' <= ch && ch <= '9' && fc->dot == 0)
 		fc->width = calc_width(str, inc);
+	else if (('1' <= ch && ch <= '9') && fc->dot > 0)
+		fc->precision = calc_width(str, inc);
 	(*inc)++;
 }

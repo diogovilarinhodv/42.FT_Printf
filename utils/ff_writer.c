@@ -1,6 +1,6 @@
 #include "../ft_printf.h"
 
-int ff_writer(char *result)
+int	ff_writer(char *result)
 {
 	int	inc;
 
