@@ -1,38 +1,26 @@
 #include "../ft_printf.h"
 
-static void	less_with_width_pad(t_flag_count fc, char **r, char *str_pad)
+static void	flags_not_handler(t_flag_count *fc)
 {
-	char	*tmp;
-
-	if (**r == '-' && !(fc.less > 0))
-	{
-		**r = *str_pad;
-		*str_pad = '-';
-	}
-	if (fc.less > 0)
-		tmp = ft_strjoin(*r, str_pad);
-	else
-		tmp = ft_strjoin(str_pad, *r);
-	free(str_pad);
-	free(*r);
-	*r = ft_strdup(tmp);
-	free(tmp);
+	fc->cardinal = 0;
+	fc->dot = 0;
+	fc->plus = 0;
+	fc->precision = 0;
+	fc->space = 0;
+	fc->zero = 0;
 }
 
-static void	width_padding(t_flag_count fc, int str_len, char **r)
+static int	zero_case_start(char **c)
 {
-	char	*str_pad;
-
-	if ((fc.plus || fc.space) && **r != '-')
-		fc.width--;
-	if (fc.width > str_len && fc.width > 0)
+	if (**c == '\0')
 	{
-		str_pad = str_padding(str_len, fc);
-		less_with_width_pad(fc, r, str_pad);
+		**c = 'a';
+		return (1);
 	}
+	return (0);
 }
 
-static void	zero_case(int *zero_finder, char **tmp)
+static void	zero_case_end(int *zero_finder, char **tmp)
 {
 	if (*zero_finder)
 	{
@@ -47,23 +35,18 @@ char	*format_c(int chr, t_flag_count fc)
 {
 	char	*c;
 	char	*tmp;
-	int		str_len;
 	int		zero_finder;
 
 	zero_finder = 0;
 	c = malloc(2);
 	*c = (char)chr;
 	*(c + 1) = '\0';
-	if (*c == '\0')
-	{
-		*c = 'a';
-		zero_finder = 1;
-	}
-	str_len = 1;
-	width_padding(fc, str_len, &c);
+	zero_finder = zero_case_start(&c);
+	flags_not_handler(&fc);
+	width_handler(fc, 1, &c);
 	tmp = ft_strjoin(c, "\n\0");
 	free(c);
-	zero_case(&zero_finder, &tmp);
+	zero_case_end(&zero_finder, &tmp);
 	c = tmp;
 	return (c);
 }
