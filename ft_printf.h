@@ -49,10 +49,16 @@ char	*format_X(unsigned long num, t_flag_count s_fc);
 int		check_format(char c);
 int		ff_writer(char *result);
 int		reset_count_flag(t_flag_count *s_fc);
-int		calc_width(const char *str, int *inc);
-char	*str_padding(int str_len, t_flag_count fc);
 char	*format_finder(char c, va_list ap, t_flag_count s_fc);
-void	count_flag(const char *str, int *inc, t_flag_count *fc);
+void	count_flag(char ch, t_flag_count *fc);
+
+// FLAGS HANDLER
+void	less_with_width(t_flag_count fc, char **r, char *str_pad);
+void	space_or_plus(t_flag_count fc, char **r);
+void	width_handler(t_flag_count fc, int str_len, char **r);
+char	*width_padding(t_flag_count fc);
 char	*precision_padding(int str_len, t_flag_count fc);
+void	precision_handler(t_flag_count fc, int str_len, char **r);
+void	precision_string_handler(t_flag_count fc, int str_len, char *str);
 
 #endif

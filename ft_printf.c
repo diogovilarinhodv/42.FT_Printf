@@ -48,7 +48,8 @@ static int	read_cycle(const char *str, va_list ap)
 				cnt_chars += get_result(str, ap, &inc, s_fc);
 				break ;
 			}
-			count_flag(str, &inc, &s_fc);
+			count_flag(*(str + inc), &s_fc);
+			inc++;
 		}
 		if (reset_and_writer(str, &inc, &s_fc, &cnt_chars) == -1)
 			break ;
