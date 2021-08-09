@@ -14,8 +14,10 @@ char	*format_u(unsigned int num, t_flag_count fc)
 	int		str_len;
 
 	r = ft_unsigned_itoa(num);
-	str_len = ft_strlen(r);
 	flags_not_handler(&fc);
+	if (fc.dot > 0 && fc.precision == 0)
+		*r = '\0';
+	str_len = ft_strlen(r);
 	precision_handler(fc, str_len, &r);
 	str_len = ft_strlen(r);
 	width_handler(fc, str_len, &r);

@@ -23,6 +23,7 @@ static char	*error_handler(char *s, char **str, t_flag_count fc)
 		width_handler(fc, str_len, &tmp);
 		space_or_plus(fc, &tmp);
 		*str = ft_strjoin(tmp, "\n\0");
+		free(tmp);
 		return (*str);
 	}
 	return (NULL);
@@ -38,6 +39,7 @@ static char	*handler_with_less_flags(char *s, t_flag_count fc)
 	str = ft_strdup(s);
 	precision_string_handler(fc, str_len, str);
 	tmp = ft_strdup(str);
+	free(str);
 	str = ft_strjoin(tmp, "\n\0");
 	free(tmp);
 	return (str);

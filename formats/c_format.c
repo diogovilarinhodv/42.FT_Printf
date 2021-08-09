@@ -25,9 +25,9 @@ static void	zero_case_end(int *zero_finder, char **tmp)
 	if (*zero_finder)
 	{
 		*zero_finder = 0;
-		while (*((*tmp) + *zero_finder) == 'a')
+		while (*((*tmp) + *zero_finder) != 'a')
 			(*zero_finder)++;
-		*((*tmp) + *zero_finder - 1) = '\0';
+		*((*tmp) + *zero_finder) = '\0';
 	}
 }
 

@@ -14,6 +14,8 @@ char	*format_x(unsigned long num, t_flag_count fc)
 
 	r = dec_to_hexa_x(num);
 	str_len = ft_strlen(r);
+	if (fc.dot > 0 && fc.precision == 0)
+		*r = '\0';
 	if (fc.cardinal > 0 && *r != '0')
 		tmp = ft_strjoin("0x", r);
 	else
