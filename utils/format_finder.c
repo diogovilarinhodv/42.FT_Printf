@@ -17,7 +17,7 @@ char	*format_finder(char c, va_list ap, t_flag_count s_fc)
 	else if (c == 'X')
 		return (format_X(va_arg(ap, unsigned long), s_fc));
 	else if (c == '%')
-		return (format_percent());
+		return (format_percent(s_fc));
 	else
 		return (NULL);
 }
