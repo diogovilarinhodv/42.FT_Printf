@@ -39,7 +39,7 @@ char	*dec_to_hexa_X(unsigned long num);
 char	*format_c(int chr, t_flag_count fc);
 char	*format_d(int num, t_flag_count s_fc);
 char	*format_p(unsigned long num, t_flag_count fc);
-char	*format_percent(void);
+char	*format_percent(t_flag_count fc);
 char	*format_s(char *s, t_flag_count fc);
 char	*format_u(unsigned int num, t_flag_count fc);
 char	*format_x(unsigned long num, t_flag_count s_fc);

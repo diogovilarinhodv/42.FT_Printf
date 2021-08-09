@@ -25,7 +25,7 @@ FLAGS_HANDLERS = flags_handler/less_with_width.c flags_handler/precision_handler
 					flags_handler/precision_string_handler.c flags_handler/space_or_plus.c flags_handler/width_handler.c \
 					flags_handler/width_padding.c
 
-BONUS= utils/check_format.c utils/count_flag.c utils/reset_count_flag.c
+BONUS = ${SRCS}
 
 OBJS	= ${SRCS:.c=.o} ${FORMATS:.c=.o} ${CONVERTS:.c=.o} ${UTILS:.c=.o} ${LIBFT_FUNCS:.c=.o} ${FLAGS_HANDLERS:.c=.o}
 
@@ -50,4 +50,6 @@ fclean:	clean
 	
 re:	fclean all
 
-.PHONY:	all clean fclean re
+rebonus: re bonus
+
+.PHONY:	all bonus rebonus clean fclean re
